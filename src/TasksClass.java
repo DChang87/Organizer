@@ -67,6 +67,10 @@ class TasksClass {
 				edit_done.set(i,EDIT);
 			}
 		}
+		for (int i=0;i<drawPanel.org.detailtextfields.size();i++){
+			drawPanel.org.detailtextfields.get(i).setVisible(true);
+		}
+		drawPanel.org.notesArea.setVisible(true);
 		edit_done.add(DONE);
 		rank.add(0);
 		notes.add("");
@@ -74,7 +78,6 @@ class TasksClass {
 		completion.add(0);
 		hovering.add(0);
 		hoveringText.add(0);
-		System.out.println("newtask");
 		dueDates.add(new ArrayList<Integer>());
 		dueDates.get(currentTask).add(drawPanel.currentdate[0]);
 		dueDates.get(currentTask).add(drawPanel.currentdate[1]);
@@ -114,6 +117,10 @@ class TasksClass {
 			drawPanel.revalidate();
 			drawPanel.repaint();
 		}
+		for (int i=0;i<drawPanel.org.detailtextfields.size();i++){
+			drawPanel.org.detailtextfields.get(i).setVisible(false);
+		}
+		drawPanel.org.notesArea.setVisible(false);
 		drawPanel.org.tasklist.clear();
 		edit_done.clear();
 		numTasks=0;
