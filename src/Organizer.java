@@ -73,9 +73,12 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		Object source = evt.getSource();
 		if (source==myTimer){
 			drawPanel.repaint();
-			drawPanel.setD.checkSDCollision(mouseX,mouseY,down);
+			drawPanel.setD.checkSDCollision(this);
 			drawPanel.tc.checkNTCollision(this);
 			drawPanel.tc.checkCDCollision(mouseX, mouseY, down);
+			for (int i=0;i<drawPanel.tc.numTasks;i++){
+				drawPanel.tc.checkEDCollide(this,i);
+			}
 		}
 	}
 	// ------------ MouseListener ------------------------------------------
