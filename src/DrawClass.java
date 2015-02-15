@@ -8,25 +8,44 @@ import java.io.*;
 
 import javax.swing.*;
 
+import java.text.*;
 import java.util.*;
 class DrawClass extends JPanel implements KeyListener{
 	public Organizer org;
 	private boolean[] keys;
 	private Image background;
 	private Image tbackground;
-	private Font Giddyup;
+	private Image rbackground;
+	private Image testbutton;
+	private Font Giddyup,Giddyup50,Giddyup25;
 	public final int NORMAL=0, HOVER=1,PRESSED=2;
 	public int settingDate=NORMAL;
 	public boolean editDate=false;
 	public Color setDateColor = new Color(5,103,128);
+	public int[] currentdate=new int[3];
+	public DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	public Date today = new Date();
+	
+	/*
+	 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+Date date = new Date();
+System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
+	 */
 	setDate setD;
+	TasksClass tc;
 	public DrawClass(Organizer o){
 		keys = new boolean[65535];
 		setD= new setDate(this);
+		tc = new TasksClass(this);
 		background = new ImageIcon("background.jpg").getImage();
+		testbutton = new ImageIcon("button.png").getImage();
 		tbackground = new ImageIcon("taskbackground.png").getImage();
+		rbackground = new ImageIcon("rightbackground.png").getImage();
 		addKeyListener(this);
-		
+		currentdate[0]=Integer.parseInt(dateFormat.format(today).substring(8,10));
+		currentdate[1]=Integer.parseInt(dateFormat.format(today).substring(5,7));
+		currentdate[2]=Integer.parseInt(dateFormat.format(today).substring(0,4));
+		System.out.println(currentdate[2]+" "+currentdate[1]+" "+currentdate[0]);
 		setSize(800,600);
 		org = o;
 		newFont();
@@ -40,7 +59,9 @@ class DrawClass extends JPanel implements KeyListener{
 		try{
 			is = new FileInputStream("Giddyup.ttf");
 			Giddyup = Font.createFont(Font.TRUETYPE_FONT, is);
-			Giddyup=Giddyup.deriveFont(50f);
+			Giddyup50=Giddyup.deriveFont(50f);
+			Giddyup25=Giddyup.deriveFont(25f);
+			
 		}
 		catch(IOException ex){
 			System.out.println("File not found");
@@ -57,12 +78,24 @@ class DrawClass extends JPanel implements KeyListener{
     public void keyReleased(KeyEvent e){
     	keys[e.getKeyCode()]=false;
     }
+    
 	public void paintComponent(Graphics g){
 		g.drawImage(background,0,0,this);
 		g.drawImage(tbackground,20,25,this);
-		g.setFont(Giddyup);
+		g.drawImage(rbackground,480,80,this);
+		g.drawImage(testbutton,480,750,this);
+		g.setFont(Giddyup50);
 		g.setColor(setDateColor);
-		g.drawString("Set Date",460,60);
+		g.drawString("Set Date",480,70);
+		g.setColor(new Color(0,154,196));
+		g.drawString("all tasks",565,120);
+		g.setFont(Giddyup25);
+		g.setColor(new Color(63,63,161));
+		
+		for (int i=0;i<tc.allTasks.size();i++){
+			g.drawString(tc.allTasks.get(i),500,100+30*i);
+		}
+		g.drawString("Current Date: "+currentdate[2]+"/"+currentdate[1]+"/"+currentdate[0],575,20);
 	}
     
 }
