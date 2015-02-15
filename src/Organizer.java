@@ -1,13 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.TextField;
 import java.awt.event.*;
+import java.io.*;
 
 import javax.swing.*;
 public class Organizer extends JFrame implements ActionListener,MouseMotionListener,MouseListener{
 	DrawClass drawPanel = new DrawClass(this);
-	public TextField daytext = new TextField("Enter day",7);
-	public TextField monthtext = new TextField("Enter month",7);
-	public TextField yeartext = new TextField("Enter year",7);
+	public TextField daytext = new TextField("day",4);
+	public TextField monthtext = new TextField("month",4);
+	public TextField yeartext = new TextField("year",4);
 	public int mouseX,mouseY;
 	public boolean down;
 	Timer myTimer=new Timer(1,this);
@@ -28,9 +29,9 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		daytext.addActionListener(this);
 		monthtext.addActionListener(this);
 		yeartext.addActionListener(this);
-		daytext.setBounds(600,40,60,20);
-		monthtext.setBounds(665,40,60,20);
-		yeartext.setBounds(730,40,60,20);
+		daytext.setBounds(630,50,40,20);
+		monthtext.setBounds(680,50,40,20);
+		yeartext.setBounds(730,50,40,20);
 		daytext.setVisible(false);
 		monthtext.setVisible(false);
 		yeartext.setVisible(false);
@@ -39,17 +40,34 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		drawPanel.add(yeartext);
 		setResizable(false);
 		setVisible(true);
-		
+		createTextFiles();
 	}
 	
 	public static void main (String[] args){
 		new Organizer();
 	}
+	public void createTextFiles(){
+		Writer writer = null;
+		int[] days = {31,28,31,30,31,30,31,31,30,31,30,31};
+		for (int year=2000;year<=2020;year++){
+			for(int month=1;month<=12;month++){
+				for(int day=1;day<=days[month-1];day++){
+					File parentDir = new File("alldates");
+					parentDir.mkdir();
+					String hash = year+"-"+month+"-"+day;
+					String fileName = hash + ".txt";
+					File file = new File(parentDir, fileName);
+					try {
+						file.createNewFile();
+					} 
+					catch (IOException e) {
+					} 
+				}
+			}
+		}
+	}
 	public void actionPerformed(ActionEvent evt){
 		Object source = evt.getSource();
-		//int day = Integer.parseInt(daytext.getText());
-		//int month =Integer.parseInt(monthtext.getText());
-		//int year = Integer.parseInt(yeartext.getText());
 		if (source==myTimer){
 			drawPanel.repaint();
 			drawPanel.setD.checkSDCollision(mouseX,mouseY,down);
