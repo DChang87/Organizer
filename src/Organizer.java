@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.TextField;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 public class Organizer extends JFrame implements ActionListener,MouseMotionListener,MouseListener{
@@ -12,7 +13,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 	public int mouseX,mouseY;
 	public boolean down;
 	Timer myTimer=new Timer(1,this);
-	
+	public ArrayList<TextField> tasklist = new ArrayList<TextField>();
 	public Organizer(){
 		super("Task Organizer");
 		myTimer.start();
@@ -39,9 +40,14 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		setVisible(true);
 		createTextFiles();
 	}
-	
 	public static void main (String[] args){
 		new Organizer();
+	}
+	public void addTextField(){
+		tasklist.add(new TextField());
+		tasklist.get(drawPanel.tc.currentTask).setBounds(490,140+drawPanel.tc.currentTask*40,180,30);
+		tasklist.get(drawPanel.tc.currentTask).setVisible(true);
+		drawPanel.add(tasklist.get(drawPanel.tc.currentTask));
 	}
 	public void createTextFiles(){
 		Writer writer = null;
@@ -68,7 +74,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		if (source==myTimer){
 			drawPanel.repaint();
 			drawPanel.setD.checkSDCollision(mouseX,mouseY,down);
-			drawPanel.tc.checkNTCollision(mouseX,mouseY,down);
+			drawPanel.tc.checkNTCollision(this);
 			drawPanel.tc.checkCDCollision(mouseX, mouseY, down);
 		}
 	}
