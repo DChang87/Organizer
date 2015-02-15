@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 public class Organizer extends JFrame implements ActionListener,MouseMotionListener,MouseListener{
-	DrawClass drawPanel = new DrawClass(this);
+	DrawClass drawPanel;
 	public TextField daytext = new TextField("day",4);
 	public TextField monthtext = new TextField("month",4);
 	public TextField yeartext = new TextField("year",4);
@@ -21,6 +21,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		super("Task Organizer");
 		createTextFiles();
 		myTimer.start();
+		drawPanel = new DrawClass(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,600);
 		setLayout(null);
