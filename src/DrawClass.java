@@ -16,7 +16,7 @@ class DrawClass extends JPanel implements KeyListener{
 	private Image background;
 	private Image tbackground;
 	private Image rbackground;
-	private Image testbutton;
+	public Image newtaskbutton,cleardaybutton,newtaskbutton2,cleardaybutton2;
 	private Font Giddyup,Giddyup50,Giddyup25;
 	public final int NORMAL=0, HOVER=1,PRESSED=2;
 	public int settingDate=NORMAL;
@@ -25,6 +25,8 @@ class DrawClass extends JPanel implements KeyListener{
 	public int[] currentdate=new int[3];
 	public DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	public Date today = new Date();
+	public Image newtaskDraw=newtaskbutton;
+	public Image clearDayDraw = cleardaybutton;
 	
 	/*
 	 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -38,9 +40,12 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		setD= new setDate(this);
 		tc = new TasksClass(this);
 		background = new ImageIcon("background.jpg").getImage();
-		testbutton = new ImageIcon("button.png").getImage();
+		newtaskbutton = new ImageIcon("newtaskbutton.png").getImage();
+		cleardaybutton = new ImageIcon("cleardaybutton.png").getImage();
 		tbackground = new ImageIcon("taskbackground.png").getImage();
 		rbackground = new ImageIcon("rightbackground.png").getImage();
+		newtaskbutton2 = new ImageIcon("newtaskbutton2.png").getImage();
+		cleardaybutton2 = new ImageIcon("cleardaybutton2.png").getImage();
 		addKeyListener(this);
 		currentdate[0]=Integer.parseInt(dateFormat.format(today).substring(8,10));
 		currentdate[1]=Integer.parseInt(dateFormat.format(today).substring(5,7));
@@ -79,11 +84,12 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
     	keys[e.getKeyCode()]=false;
     }
     
+    
 	public void paintComponent(Graphics g){
 		g.drawImage(background,0,0,this);
 		g.drawImage(tbackground,20,25,this);
 		g.drawImage(rbackground,480,80,this);
-		g.drawImage(testbutton,480,750,this);
+		
 		g.setFont(Giddyup50);
 		g.setColor(setDateColor);
 		g.drawString("Set Date",480,70);
@@ -95,6 +101,8 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		for (int i=0;i<tc.allTasks.size();i++){
 			g.drawString(tc.allTasks.get(i),500,100+30*i);
 		}
+		g.drawImage(newtaskDraw,480,490,this);
+		g.drawImage(clearDayDraw,630,490,this);
 		g.drawString("Current Date: "+currentdate[2]+"/"+currentdate[1]+"/"+currentdate[0],575,20);
 	}
     
