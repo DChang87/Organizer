@@ -17,7 +17,7 @@ class DrawClass extends JPanel implements KeyListener{
 	private Image tbackground;
 	private Image rbackground;
 	public Image newtaskbutton,cleardaybutton,newtaskbutton2,cleardaybutton2;
-	private Font Giddyup,Giddyup50,Giddyup25;
+	private Font Giddyup,Giddyup50,Giddyup35,Giddyup20;
 	public final int NORMAL=0, HOVER=1,PRESSED=2;
 	public int settingDate=NORMAL;
 	public boolean editDate=false;
@@ -27,6 +27,7 @@ class DrawClass extends JPanel implements KeyListener{
 	public Date today = new Date();
 	public Image newtaskDraw=newtaskbutton;
 	public Image clearDayDraw = cleardaybutton;
+	public Image[] edit_doneImages= new Image[4];
 	
 	/*
 	 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -39,6 +40,10 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		keys = new boolean[65535];
 		setD= new setDate(this);
 		tc = new TasksClass(this);
+		edit_doneImages[1]=new ImageIcon("done.png").getImage();
+		edit_doneImages[3]=new ImageIcon("done2.png").getImage();
+		edit_doneImages[0]=new ImageIcon("edit.png").getImage();
+		edit_doneImages[2]=new ImageIcon("edit2.png").getImage();
 		background = new ImageIcon("background.jpg").getImage();
 		newtaskbutton = new ImageIcon("newtaskbutton.png").getImage();
 		cleardaybutton = new ImageIcon("cleardaybutton.png").getImage();
@@ -65,7 +70,8 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 			is = new FileInputStream("Giddyup.ttf");
 			Giddyup = Font.createFont(Font.TRUETYPE_FONT, is);
 			Giddyup50=Giddyup.deriveFont(50f);
-			Giddyup25=Giddyup.deriveFont(25f);
+			Giddyup35=Giddyup.deriveFont(35f);
+			Giddyup20=Giddyup.deriveFont(20f);
 			
 		}
 		catch(IOException ex){
@@ -89,21 +95,23 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		g.drawImage(background,0,0,this);
 		g.drawImage(tbackground,20,25,this);
 		g.drawImage(rbackground,480,80,this);
-		
+		for (int i=0;i<tc.allTasks.size();i++){
+			g.drawImage(edit_doneImages[tc.edit_done.get(i)+tc.hovering.get(i)],730,135+i*40,this);
+		}
 		g.setFont(Giddyup50);
 		g.setColor(setDateColor);
 		g.drawString("Set Date",480,70);
 		g.setColor(new Color(0,154,196));
 		g.drawString("all tasks",565,120);
-		g.setFont(Giddyup25);
+		g.setFont(Giddyup35);
 		g.setColor(new Color(63,63,161));
 		
 		for (int i=0;i<tc.allTasks.size();i++){
-			g.drawString(tc.allTasks.get(i),500,150+30*i);
+			g.drawString(tc.allTasks.get(i),500,170+35*i);
 		}
 		g.drawImage(newtaskDraw,480,490,this);
 		g.drawImage(clearDayDraw,630,490,this);
-		g.drawString("Current Date: "+currentdate[2]+"/"+currentdate[1]+"/"+currentdate[0],575,20);
-	}
-    
+		g.setFont(Giddyup20);
+		g.drawString("Current Date: "+currentdate[2]+"/"+currentdate[1]+"/"+currentdate[0],610,20);
+	}    
 }
