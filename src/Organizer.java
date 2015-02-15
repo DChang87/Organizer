@@ -57,28 +57,65 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		int i=0;
 		TextField tempTF = new TextField();
 		detailtextfields.add(new TextField());
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText("New Task");
+		}
+		else{
+			detailtextfields.get(i).setText(drawPanel.tc.allTasks.get(drawPanel.tc.currentTask));
+		}
 		detailtextfields.get(i).setBounds(200,40,220,35);
 		i++;
 		detailtextfields.add(new TextField());
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText("0");
+		}
+		else{
+			detailtextfields.get(i).setText(""+drawPanel.tc.rank.get(drawPanel.tc.currentTask));
+		}
 		detailtextfields.get(i).setBounds(130,80,50,35);
 		i++;
 		detailtextfields.add(new TextField());
-		detailtextfields.get(i).setBounds(350,80,100,35);
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText("0");
+		}
+		else{
+			detailtextfields.get(i).setText(""+drawPanel.tc.completion.get(drawPanel.tc.currentTask));
+		}
+		detailtextfields.get(i).setBounds(345,80,100,35);
 		i++;
 		detailtextfields.add(new TextField());
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText(drawPanel.currentdate[0]+"");
+		}
+		else{
+			detailtextfields.get(i).setText(""+drawPanel.tc.dueDates.get(drawPanel.tc.currentTask).get(0));
+		}
 		detailtextfields.get(i).setBounds(170,120,40,35);
 		i++;
 		detailtextfields.add(new TextField());
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText(drawPanel.currentdate[1]+"");
+		}
+		else{
+			detailtextfields.get(i).setText(""+drawPanel.tc.dueDates.get(drawPanel.tc.currentTask).get(1));
+		}		
 		detailtextfields.get(i).setBounds(220,120,40,35);
 		i++;
 		detailtextfields.add(new TextField());
+		if (drawPanel.tc.allTasks.size()==0){
+			detailtextfields.get(i).setText(drawPanel.currentdate[2]+"");
+		}
+		else{
+			detailtextfields.get(i).setText(""+drawPanel.tc.dueDates.get(drawPanel.tc.currentTask).get(2));
+		}
+		
 		detailtextfields.get(i).setBounds(270,120,40,35);
 		i++;
-		notesArea.setVisible(true);
+		notesArea.setVisible(false);
 		notesArea.setBounds(140,160,300,200);
 		drawPanel.add(notesArea);
 		for (int k=0;k<detailtextfields.size();k++){
-			detailtextfields.get(k).setVisible(true);
+			detailtextfields.get(k).setVisible(false);
 			drawPanel.add(detailtextfields.get(k));
 		}
 		
@@ -110,6 +147,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 			drawPanel.setD.checkSDCollision(this);
 			drawPanel.tc.checkNTCollision(this);
 			drawPanel.tc.checkCDCollision(mouseX, mouseY, down);
+			drawPanel.tc.checkEditDonedetails(this);
 			for (int i=0;i<drawPanel.tc.numTasks;i++){
 				drawPanel.tc.checkEDCollide(this,i);
 				drawPanel.tc.checkTextCollision(this, i);
