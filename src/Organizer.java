@@ -26,9 +26,6 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		add(drawPanel);
 		addMouseMotionListener(this);
 		addMouseListener(this);
-		daytext.addActionListener(this);
-		monthtext.addActionListener(this);
-		yeartext.addActionListener(this);
 		daytext.setBounds(630,50,40,20);
 		monthtext.setBounds(680,50,40,20);
 		yeartext.setBounds(730,50,40,20);
@@ -71,12 +68,8 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		if (source==myTimer){
 			drawPanel.repaint();
 			drawPanel.setD.checkSDCollision(mouseX,mouseY,down);
-		}
-		if (source==daytext){
-		}
-		if (source==monthtext){
-		}
-		if (source==yeartext){
+			drawPanel.tc.checkNTCollision(mouseX,mouseY,down);
+			drawPanel.tc.checkCDCollision(mouseX, mouseY, down);
 		}
 	}
 	// ------------ MouseListener ------------------------------------------
