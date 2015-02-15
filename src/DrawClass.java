@@ -102,17 +102,21 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		}
 		g.setFont(Giddyup50);
 		g.setColor(setDateColor);
+		g.drawImage(edit_doneImages[tc.detailsEditDone+tc.hovering_editDetails],220,510,this);
 		g.drawString("Set Date",480,70);
 		g.setColor(new Color(0,154,196));
 		g.drawString("all tasks",565,120);
 		g.setFont(Giddyup35);
 		g.setColor(new Color(63,63,161));
 		if (tc.currentTask>=0){
-			g.drawString("Task Name: "+tc.allTasks.get(tc.currentTask),60,70);
+			g.drawString("Task Name: ",60,70);
 			g.drawString("Rank: ",60,110);
 			g.drawString("Completion: ", 220, 110);
 			g.drawString("Due Date: ",60,150);
 			g.drawString("Notes: ",60,190);
+		}
+		if (tc.detailsEditDone==tc.EDIT && tc.allTasks.size()>0){
+			g.drawString(tc.allTasks.get(tc.currentTask),200,70);
 		}
 		for (int i=0;i<tc.allTasks.size();i++){
 			g.setColor(textColors[tc.hoveringText.get(i)]);
