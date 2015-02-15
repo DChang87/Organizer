@@ -28,7 +28,7 @@ class DrawClass extends JPanel implements KeyListener{
 	public Image newtaskDraw=newtaskbutton;
 	public Image clearDayDraw = cleardaybutton;
 	public Image[] edit_doneImages= new Image[4];
-	
+	public Color[] textColors = new Color[2];
 	/*
 	 * DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 Date date = new Date();
@@ -40,6 +40,8 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		keys = new boolean[65535];
 		setD= new setDate(this);
 		tc = new TasksClass(this);
+		textColors[0]=new Color(16,95,163);
+		textColors[1]=new Color(16,60,163);
 		edit_doneImages[1]=new ImageIcon("done.png").getImage();
 		edit_doneImages[3]=new ImageIcon("done2.png").getImage();
 		edit_doneImages[0]=new ImageIcon("edit.png").getImage();
@@ -96,7 +98,7 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		g.drawImage(tbackground,20,25,this);
 		g.drawImage(rbackground,480,80,this);
 		for (int i=0;i<tc.allTasks.size();i++){
-			g.drawImage(edit_doneImages[tc.edit_done.get(i)+tc.hovering.get(i)],730,135+i*40,this);
+			g.drawImage(edit_doneImages[tc.edit_done.get(i)+tc.hovering.get(i)],730,140+i*41,this);
 		}
 		g.setFont(Giddyup50);
 		g.setColor(setDateColor);
@@ -105,13 +107,20 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		g.drawString("all tasks",565,120);
 		g.setFont(Giddyup35);
 		g.setColor(new Color(63,63,161));
-		
+		if (tc.currentTask>=0){
+			g.drawString("Task Name: "+tc.allTasks.get(tc.currentTask),60,60);
+			g.drawString("Rank: ",60,100);
+		}
 		for (int i=0;i<tc.allTasks.size();i++){
+			g.setColor(textColors[tc.hoveringText.get(i)]);
 			g.drawString(tc.allTasks.get(i),500,170+35*i);
 		}
 		g.drawImage(newtaskDraw,480,490,this);
 		g.drawImage(clearDayDraw,630,490,this);
 		g.setFont(Giddyup20);
+		//print task detail
+		
+		g.setColor(Color.BLACK);
 		g.drawString("Current Date: "+currentdate[2]+"/"+currentdate[1]+"/"+currentdate[0],610,20);
 	}    
 }
