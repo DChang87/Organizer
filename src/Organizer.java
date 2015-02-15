@@ -19,6 +19,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 	public ArrayList<TextField> detailtextfields = new ArrayList<TextField>();
 	public Organizer(){
 		super("Task Organizer");
+		createTextFiles();
 		myTimer.start();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,600);
@@ -41,7 +42,6 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		drawPanel.add(yeartext);
 		setResizable(false);
 		setVisible(true);
-		createTextFiles();
 		create_detailtextfields();
 	}
 	public static void main (String[] args){
@@ -124,15 +124,18 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		Writer writer = null;
 		int[] days = {31,28,31,30,31,30,31,31,30,31,30,31};
 		for (int year=2000;year<=2020;year++){
+			System.out.println("year"+year);
 			for(int month=1;month<=12;month++){
 				for(int day=1;day<=days[month-1];day++){
-					File parentDir = new File("alldates");
-					parentDir.mkdir();
+					
 					String hash = year+"-"+month+"-"+day;
 					String fileName = hash + ".txt";
-					File file = new File(parentDir, fileName);
+					
 					try {
-						file.createNewFile();
+						FileWriter outfile = new FileWriter(new File(fileName));
+						outfile.write("0");
+						outfile.close();
+						
 					} 
 					catch (IOException e) {
 					} 
