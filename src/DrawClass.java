@@ -108,8 +108,11 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		g.setFont(Giddyup35);
 		g.setColor(new Color(63,63,161));
 		if (tc.currentTask>=0){
-			g.drawString("Task Name: "+tc.allTasks.get(tc.currentTask),60,60);
-			g.drawString("Rank: ",60,100);
+			g.drawString("Task Name: "+tc.allTasks.get(tc.currentTask),60,70);
+			g.drawString("Rank: ",60,110);
+			g.drawString("Completion: ", 220, 110);
+			g.drawString("Due Date: ",60,150);
+			g.drawString("Notes: ",60,190);
 		}
 		for (int i=0;i<tc.allTasks.size();i++){
 			g.setColor(textColors[tc.hoveringText.get(i)]);
