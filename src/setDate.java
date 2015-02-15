@@ -24,6 +24,10 @@ class setDate {
 		catch(NumberFormatException ex){
 		}
 		int[] monthlengths = {31,28,31,30,31,30,31,31,30,31,30,31};
+		if (dates[1]>12 || dates[2]>2020 || dates[2]<2000){
+			dates[2]=-1;
+			return dates;
+		}
 		if (dates[0]>monthlengths[dates[1]-1]){
 			dates[0]=-1;
 		}
