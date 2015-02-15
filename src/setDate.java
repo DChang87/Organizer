@@ -11,6 +11,25 @@ class setDate {
 	public boolean collide(int x,int y, int width, int height,int mouseX,int mouseY){
 		return x<=mouseX && mouseX<=x+width && mouseY<=y+height && y<=mouseY;
 	}
+	public int[] getDate(){
+		int[] dates = new int[3];
+		dates[0]=-1;
+		dates[1]=10;
+		dates[2]=-1;
+		try{
+			dates[0]=Integer.parseInt(drawPanel.org.daytext.getText());
+			dates[1]=Integer.parseInt(drawPanel.org.monthtext.getText());
+			dates[2]=Integer.parseInt(drawPanel.org.yeartext.getText());
+		}
+		catch(NumberFormatException ex){
+		}
+		int[] monthlengths = {31,28,31,30,31,30,31,31,30,31,30,31};
+		if (dates[0]>monthlengths[dates[1]-1]){
+			dates[0]=-1;
+		}
+		return dates;
+	}
+	public int[] tempdate = new int[3];
 	public void checkSDCollision(int mouseX,int mouseY,boolean down){
 		Color colour0 = new Color(5,103,128);
 		Color colour1 = new Color(0,58,82);
@@ -22,6 +41,16 @@ class setDate {
 				drawPanel.org.daytext.setVisible(true);
 				drawPanel.org.monthtext.setVisible(true);
 				drawPanel.org.yeartext.setVisible(true);
+				tempdate=getDate();
+				boolean flag=true;
+				for (int i=0;i<3;i++){
+					if (tempdate[i]==-1){
+						flag=false;
+					}
+				}
+				if (flag){
+					drawPanel.currentdate=tempdate;
+				}
 				drawPanel.editDate=true;
 			}
 			else if (collide(480,45,135,40,mouseX,mouseY)){
