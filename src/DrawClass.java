@@ -38,7 +38,6 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 	TasksClass tc;
 	public DrawClass(Organizer o){
 		keys = new boolean[65535];
-		setD= new setDate(this);
 		tc = new TasksClass(this);
 		textColors[0]=new Color(16,95,163);
 		textColors[1]=new Color(16,60,163);
@@ -59,6 +58,7 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		currentdate[2]=Integer.parseInt(dateFormat.format(today).substring(0,4));
 		System.out.println(currentdate[2]+" "+currentdate[1]+" "+currentdate[0]);
 		setSize(800,600);
+		setD= new setDate(this);
 		org = o;
 		newFont();
 	}
