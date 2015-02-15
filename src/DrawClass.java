@@ -99,7 +99,7 @@ System.out.println(dateFormat.format(date)); //2014/08/06 15:59:48
 		g.setColor(new Color(63,63,161));
 		
 		for (int i=0;i<tc.allTasks.size();i++){
-			g.drawString(tc.allTasks.get(i),500,100+30*i);
+			g.drawString(tc.allTasks.get(i),500,150+30*i);
 		}
 		g.drawImage(newtaskDraw,480,490,this);
 		g.drawImage(clearDayDraw,630,490,this);
