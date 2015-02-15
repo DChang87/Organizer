@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.event.*;
 import java.io.*;
@@ -11,6 +12,7 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 	public TextField monthtext = new TextField("month",4);
 	public TextField yeartext = new TextField("year",4);
 	public int mouseX,mouseY;
+	public TextArea notesArea = new TextArea("Enter additional information");
 	public boolean down;
 	Timer myTimer=new Timer(1,this);
 	public ArrayList<TextField> tasklist = new ArrayList<TextField>();
@@ -55,10 +57,26 @@ public class Organizer extends JFrame implements ActionListener,MouseMotionListe
 		int i=0;
 		TextField tempTF = new TextField();
 		detailtextfields.add(new TextField());
-		detailtextfields.get(i).setBounds(200,30,220,35);
+		detailtextfields.get(i).setBounds(200,40,220,35);
 		i++;
 		detailtextfields.add(new TextField());
-		detailtextfields.get(i).setBounds(130,70,50,35);
+		detailtextfields.get(i).setBounds(130,80,50,35);
+		i++;
+		detailtextfields.add(new TextField());
+		detailtextfields.get(i).setBounds(350,80,100,35);
+		i++;
+		detailtextfields.add(new TextField());
+		detailtextfields.get(i).setBounds(170,120,40,35);
+		i++;
+		detailtextfields.add(new TextField());
+		detailtextfields.get(i).setBounds(220,120,40,35);
+		i++;
+		detailtextfields.add(new TextField());
+		detailtextfields.get(i).setBounds(270,120,40,35);
+		i++;
+		notesArea.setVisible(true);
+		notesArea.setBounds(140,160,300,200);
+		drawPanel.add(notesArea);
 		for (int k=0;k<detailtextfields.size();k++){
 			detailtextfields.get(k).setVisible(true);
 			drawPanel.add(detailtextfields.get(k));
